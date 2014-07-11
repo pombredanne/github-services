@@ -5,10 +5,11 @@ By enabling this hook, Landscape will listen for pushes and on each push, instig
 Install Notes
 -------------
 
-If you have created an account already at https://landscape.io, you can simply enable or disable
-checking of your repositories. The hooks will automatically be installed and uninstalled.
+Landscape will automatically install this hook, there is no need to do it manually.
 
-If you wish to install the hook manually, you will need your authentication token, which you can find
-on your Landscape account information page (https://landscape.io/account/profile).
+To install:
+
+1.  Create an account at https://landscape.io (you can sign in with GitHub)
+2.  Enable checking on a repository. The hook will be automatically installed.
 
 For more information about Landscape, see https://landscape.io/docs/

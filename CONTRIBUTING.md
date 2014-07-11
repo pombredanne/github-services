@@ -36,8 +36,9 @@ active contributor to the hook file itself.
 You can annotate this directly in the hook like so:
 
 ```ruby
-class Service::MyService < Service
-  string :project, :api_token
+class Service::MyService < Service::HttpPost
+  string :project
+  password :api_token
 
   # only include 'project' in the debug logs, skip the api token.
   white_list :project
@@ -81,7 +82,7 @@ You can test your service in a ruby irb console:
       # Hash of payload.
       {'blah' => 'payload!'})
 
-    svc.receive_push
+    svc.receive_event
     ```
 
 3. The third argument is optional if you just want to use the sample
@@ -92,7 +93,7 @@ You can test your service in a ruby irb console:
       # Hash of configuration information.
       {'token' => 'abc'})
 
-    svc.receive_push
+    svc.receive_event
     ```
 
 Other hook types

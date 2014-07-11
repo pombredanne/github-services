@@ -26,8 +26,6 @@ require 'rubyforge'
 require 'oauth'
 require 'yammer4r'
 require 'twilio-ruby'
-require 'right_aws'
-require 'right_http_connection'
 
 # vendor
 require 'basecamp'
@@ -62,6 +60,9 @@ module Faraday
     end
   end
 end
+
+XMLRPC::Config::send(:remove_const, :ENABLE_MARSHALLING)
+XMLRPC::Config::ENABLE_MARSHALLING = false
 
 module GitHubServices
   VERSION = '1.0.0'

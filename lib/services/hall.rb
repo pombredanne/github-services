@@ -1,11 +1,11 @@
 class Service::Hall < Service
 
   default_events :commit_comment, :gollum, :issues, :issue_comment, :pull_request, :push
-  string :room_token
+  password :room_token
 
   # Contributing Assets
   url "https://hall.com"
-  logo_url "https://hall.com/images/media_kit/hall_logo.jpg"
+  logo_url "https://s3.amazonaws.com/hall-production-assets/assets/media_kit/hall_logo-8b3fb6d39f78ad4b234e684f378b87b7.jpg"
   maintained_by :github => 'bhellman1'
   supported_by :web => 'https://hallcom.uservoice.com/', :email => 'contact@hall-inc.com', :twitter => 'hall'
 

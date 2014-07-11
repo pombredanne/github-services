@@ -22,15 +22,15 @@ class Service::IRC < Service
   end
 
   def receive_pull_request
-    send_messages "#{irc_pull_request_summary_message}  #{fmt_url url}" if action =~ /(open)|(close)/
+    send_messages "#{irc_pull_request_summary_message} #{fmt_url url}" if action =~ /(open)|(close)/
   end
 
   def receive_pull_request_review_comment
-    send_messages "#{irc_pull_request_review_comment_summary_message}  #{fmt_url url}"
+    send_messages "#{irc_pull_request_review_comment_summary_message} #{fmt_url url}"
   end
 
   def receive_issues
-    send_messages "#{irc_issue_summary_message}  #{fmt_url url}"
+    send_messages "#{irc_issue_summary_message} #{fmt_url url}"
   end
 
   def receive_issue_comment
@@ -52,7 +52,7 @@ class Service::IRC < Service
     end
 
     rooms   = rooms.gsub(",", " ").split(" ").map{|room| room[0].chr == '#' ? room : "##{room}"}
-    botname = data['nick'].to_s.empty? ? "GitHub#{rand(200)}" : data['nick']
+    botname = data['nick'].to_s.empty? ? "GitHub#{rand(200)}" : data['nick'][0..16]
     command = data['notice'].to_i == 1 ? 'NOTICE' : 'PRIVMSG'
 
     irc_password("PASS", data['password']) if !data['password'].to_s.empty?
@@ -175,11 +175,11 @@ class Service::IRC < Service
   end
 
   def default_port
-    use_ssl? ? 9999 : 6667
+    use_ssl? ? 6697 : 6667
   end
 
   def port
-    data['port'] ? data['port'].to_i : default_port
+    data['port'].to_i > 0 ? data['port'].to_i : default_port
   end
 
   def url
@@ -219,7 +219,7 @@ class Service::IRC < Service
 
   def irc_push_summary_message
     message = []
-    message << "\00301[#{fmt_repo repo_name}\00301] #{fmt_name pusher_name}"
+    message << "[#{fmt_repo repo_name}] #{fmt_name pusher_name}"
 
     if created?
       if tag?
